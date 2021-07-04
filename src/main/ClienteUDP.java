@@ -12,9 +12,10 @@ package main;
 import Domain.SavingsAccount;
 import java.io.*;
 import java.net.*;
-import java.util.LinkedList;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ClienteUDP{
     private DatagramSocket socket;
@@ -33,7 +34,7 @@ public class ClienteUDP{
 
     }
 
-    private void ejecutarCliente(String o) {
+    private void ejecutarCliente(String o) throws ParseException {
 
         try {
 
@@ -67,7 +68,19 @@ public class ClienteUDP{
 //                SavingsAccount mensaje2 = SavingsAccount.fromByteArray(recibirPaquete.getData());
                 String mensaje2 = new String(recibirPaquete.getData(), 0, recibirPaquete.getLength());
                 
-                System.out.println(mensaje2);
+                String[] paqR = mensaje2.split("/");
+                
+                int nC= Integer.parseInt(paqR[0]);
+                
+                for (int i = 1; i <= nC; i++) {
+                    System.out.println(paqR[i]);
+                    String cuenta[] = paqR[i].split("*");
+                    if(cuenta[0].equals("AHORROS")){
+                        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                        Date date = format.parse(cuenta[3]);
+//                        SavingsAccount sa=new SavingsAccount(cuenta[2].charAt(0), date, Float.parseFloat(cuenta[6]), mensaje, i);
+                    }
+                }
             
             
         } catch (IOException excepcionES) {
@@ -81,7 +94,7 @@ public class ClienteUDP{
     /**
      * @param args the command line arguments
      */
-    public static Object Cliente(String s) {
+    public static Object Cliente(String s) throws ParseException {
         Object ret=null;
         ClienteUDP aplicacion=null;
        

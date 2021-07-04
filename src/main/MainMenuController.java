@@ -186,14 +186,15 @@ public class MainMenuController implements Initializable {
     @FXML
     private void btnSearch(ActionEvent event) {
         this.txtInfo.setText("");
-        ClienteUDP.Cliente(txfClientId.getText());
+//        ClienteUDP.Cliente(txfClientId.getText());******************************
         
-//        if (cm.existClient(txfClientId.getText())) {
-//
-//            txtClientData.setText(cm.getClient(txfClientId.getText()).toString());
-//
+        if (cm.existClient(txfClientId.getText())) {
+
+            txtClientData.setText(cm.getClient(txfClientId.getText()).toString());
+
 //            LinkedList<Account> list = am.getAccountsByClientId(txfClientId.getText());
-//
+            LinkedList<Account> list =(LinkedList) ClienteUDP.Cliente(txfClientId.getText());
+
 //            if (!list.isEmpty()) {
 //
 //                ObservableList<Account> oL = FXCollections.observableArrayList();
@@ -217,7 +218,7 @@ public class MainMenuController implements Initializable {
 //
 //            txtClientData.setText("El cliente buscado no existe.");
 //
-//        }
+        }
 
     }
 
