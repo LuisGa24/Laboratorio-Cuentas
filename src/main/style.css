@@ -1,0 +1,45 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.button{
+    -fx-background-color: #B3B3B3;
+    -fx-border-style:  solid;
+    -fx-border-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Lucida Fox";
+    -fx-font-size: 13px;
+    -fx-background-radius: 25 25 25 25;
+    -fx-border-radius: 25 25 25 25;
+}
+.button:pressed{
+    -fx-background-color: #909090;
+}
+
+.text-field{
+    -fx-font: 10px "Lucida Fax";
+    -fx-background-color: #1B549C;
+    -fx-text-fill: white;
+}
+
+.text-field:focused{
+    -fx-background-color: #DADADA;
+    -fx-text-fill: #000000;
+}
+
+.radio-button{
+    -fx-font: 12px "Lucida Fax";
+    -fx-text-fill: #000000;
+    -fx-background-color: #D14949;
+    -fx-border-style:  solid;
+    -fx-border-color: #FFFFFF;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+.radio-button:selected{
+    -fx-background-color: #ECC410;
+}
