@@ -5,19 +5,21 @@
  */
 package Domain;
 
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author LuisGa && Sebas
  */
-public final class SavingsAccount extends Account {
-
+public final class SavingsAccount extends Account implements Serializable{
+    
+    private static final long serialVersionUID = 3258698714674442547L;
     private float interestRate;           //Tasa de interes *Puede cambiar.
     private char state;        //Almacena el estado de la cuenta (activa/inactiva)
     private float balance;
@@ -96,6 +98,51 @@ public final class SavingsAccount extends Account {
        
     }
     
+    /**
+     * Se autoconvierte esta clase a array de bytes.
+     * @return La clase convertida a array de bytes.
+     */
+    public byte [] toByteArray()
+    {
+        try
+        {
+             // Se hace la conversi�n usando un ByteArrayOutputStream y un
+             // ObjetOutputStream.
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            ObjectOutputStream os = new ObjectOutputStream (bytes);
+            os.writeObject(this);
+            os.close();
+            return bytes.toByteArray();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
+    /**
+     * Se convierte el array de bytes que recibe en un objeto DatoUdp.
+     * @param bytes El array de bytes
+     * @return Un DatoUdp.
+     */
+    public static SavingsAccount fromByteArray (byte [] bytes)
+    {
+        try
+        {
+            // Se realiza la conversi�n usando un ByteArrayInputStream y un
+            // ObjectInputStream
+            ByteArrayInputStream byteArray = new ByteArrayInputStream(bytes);
+            ObjectInputStream is = new ObjectInputStream(byteArray);
+            SavingsAccount aux = (SavingsAccount)is.readObject();
+            is.close();
+            return aux;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
