@@ -32,7 +32,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle("Laboratorio Cuentas");
         stage.setResizable(false);
-
         stage.show();
     }
 

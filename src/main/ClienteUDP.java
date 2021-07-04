@@ -68,8 +68,11 @@ public class ClienteUDP {
             String mensaje2 = new String(recibirPaquete.getData(), 0, recibirPaquete.getLength());
 
             String[] paqR = mensaje2.split("/");
-
-            int nC = Integer.parseInt(paqR[0]);
+            int nC = 0;
+            if(!paqR[0].equals("")){
+                nC = Integer.parseInt(paqR[0]);
+            }
+            
             
             LinkedList<Account> list = new LinkedList<>();
 

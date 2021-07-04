@@ -98,6 +98,10 @@ public final class SavingsAccount extends Account implements Serializable{
        
     }
     
+    public String toString2() {
+            return "AHORROS#"+String.valueOf(super.getId())+"#"+ String.valueOf(super.getCurrency())+"#"+  new SimpleDateFormat("dd-MM-yyyy").format(super.getOpeningDate()) +"#"+ String.valueOf(interestRate)+"#"+ String.valueOf(state)+"#"+String.valueOf(balance) + "#" + super.getClientId(); 
+    }
+    
     /**
      * Se autoconvierte esta clase a array de bytes.
      * @return La clase convertida a array de bytes.

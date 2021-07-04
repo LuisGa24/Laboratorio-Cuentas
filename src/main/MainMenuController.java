@@ -188,13 +188,13 @@ public class MainMenuController implements Initializable {
     private void btnSearch(ActionEvent event) throws ParseException {
         this.txtInfo.setText("");
 //        ClienteUDP.Cliente(txfClientId.getText());******************************
-        
+
         if (cm.existClient(txfClientId.getText())) {
 
             txtClientData.setText(cm.getClient(txfClientId.getText()).toString());
 
             //LinkedList<Account> list = am.getAccountsByClientId(txfClientId.getText());
-            LinkedList<Account> list =(LinkedList) ClienteUDP.Cliente(txfClientId.getText());
+            LinkedList<Account> list = (LinkedList) ClienteUDP.Cliente(txfClientId.getText());
 
             if (!list.isEmpty()) {
 
@@ -274,38 +274,30 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    private void btnSaveAccount(ActionEvent event) {
-        try {
+    private void btnSaveAccount(ActionEvent event) throws ParseException {
+        
             if (rdbSavings.isSelected()) {
                 java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
                 if (txf1.getText().equals("") || txf2.getText().equals("") || txf3.getText().equals("")) {
                     alertCreator("Datos incompletos", "Complete los datos solicitados", "error");
                 } else {
-                    if (am.addAccount(new SavingsAccount(txf1.getText().charAt(0), d, Float.parseFloat(txf2.getText()), txfClientId.getText(), Float.parseFloat(txf3.getText())))) {
-                        alertCreator("Cuenta añadida", "La cuenta ha sido añadida al cliente seleccionado ", "confirmation");
-                        btnAddAccount(event);
-                    } else {
-                        alertCreator("Cuenta no añadida", "La cuenta no ha sido añadida al cliente seleccionado ", "error");
-                    }
+                    SavingsAccount sA = new SavingsAccount(txf1.getText().charAt(0), d, Float.parseFloat(txf2.getText()), txfClientId.getText(), Float.parseFloat(txf3.getText()));
+                    ClienteUDP.Cliente(sA.toString2());
+                    alertCreator("Cuenta añadida", "La cuenta ha sido añadida al cliente seleccionado ", "confirmation");
+                    btnAddAccount(event);
                 }
             } else {
                 java.util.Date d = java.sql.Date.valueOf(java.time.LocalDate.now());
                 if (txf1.getText().equals("") || txf2.getText().equals("") || txf3.getText().equals("") || txf4.getText().equals("")) {
                     alertCreator("Datos incompletos", "Complete los datos solicitados", "error");
                 } else {
-                    if (am.addAccount(new TermAccount(txf1.getText().charAt(0), d, txfClientId.getText(), Float.parseFloat(txf2.getText()), Float.parseFloat(txf3.getText()), Integer.parseInt(txf4.getText())))) {
+                        TermAccount tA = new TermAccount(txf1.getText().charAt(0), d, txfClientId.getText(), Float.parseFloat(txf2.getText()), Float.parseFloat(txf3.getText()), Integer.parseInt(txf4.getText())); 
+                        ClienteUDP.Cliente(tA.toString2());
                         alertCreator("Cuenta añadida", "La cuenta ha sido añadida al cliente seleccionado ", "confirmation");
                         btnAddAccount(event);
-                    } else {
-                        alertCreator("Cuenta no añadida", "La cuenta no ha sido añadida al cliente seleccionado ", "error");
                     }
                 }
             }
-        } catch (NumberFormatException e) {
-            alertCreator("Datos incorrectos", "Revise la información proporcionada", "error");
-        }
-
-    }
 
     public void alertCreator(String title, String content, String type) {
         if (type.equals("confirmation")) {

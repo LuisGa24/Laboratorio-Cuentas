@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @author LuisGa && Sebas
  */
-public final class TermAccount extends Account implements Serializable{
+public final class TermAccount extends Account implements Serializable {
 
     private static final long serialVersionUID = 3258698714674442547L;
     private final float interestRate;               //Tasa de interes fija.(FINAL)
@@ -42,70 +42,68 @@ public final class TermAccount extends Account implements Serializable{
     public float getStartingAmount() {
         return startingAmount;
     }
-    
-     public String[] dataName() {
-        String[] dataName = {"id", "currency", "openingDate", "clientID", "interestRate", "startingAmount","term"};
+
+    public String[] dataName() {
+        String[] dataName = {"id", "currency", "openingDate", "clientID", "interestRate", "startingAmount", "term"};
         return dataName;
     }
 
     public String[] data() {
-        
-        String[] data = {String.valueOf(super.getId()), String.valueOf(super.getCurrency()), new SimpleDateFormat("dd-MM-yyyy").format(super.getOpeningDate()), super.getClientId(), String.valueOf(interestRate), String.valueOf(startingAmount),String.valueOf(term)};
+
+        String[] data = {String.valueOf(super.getId()), String.valueOf(super.getCurrency()), new SimpleDateFormat("dd-MM-yyyy").format(super.getOpeningDate()), super.getClientId(), String.valueOf(interestRate), String.valueOf(startingAmount), String.valueOf(term)};
         return data;
     }
 
     @Override
     public String toString() {
-        
-        return "A PLAZO - ID: "+String.valueOf(super.getId())+"  Tipo de moneda: "+ String.valueOf(super.getCurrency())+"  Fecha de apertura: "+ new SimpleDateFormat("dd-MM-yyyy").format(super.getOpeningDate()) +"  Tasa de interes: "+ String.valueOf(interestRate)+"  Monto inicial: "+ String.valueOf(startingAmount)+"  Plazo: "+String.valueOf(term);
+
+        return "A PLAZO - ID: " + String.valueOf(super.getId()) + "  Tipo de moneda: " + String.valueOf(super.getCurrency()) + "  Fecha de apertura: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getOpeningDate()) + "  Tasa de interes: " + String.valueOf(interestRate) + "  Monto inicial: " + String.valueOf(startingAmount) + "  Plazo: " + String.valueOf(term);
+    }
+
+    public String toString2() {
+
+        return "A PLAZO#" + String.valueOf(super.getId()) + "#" + String.valueOf(super.getCurrency()) + "#" + new SimpleDateFormat("dd-MM-yyyy").format(super.getOpeningDate()) + "#" + String.valueOf(interestRate) + "#" + String.valueOf(startingAmount) + "#" + String.valueOf(term) + "#" + super.getClientId();
     }
 
     /**
      * Se autoconvierte esta clase a array de bytes.
+     *
      * @return La clase convertida a array de bytes.
      */
-    public byte [] toByteArray()
-    {
-        try
-        {
-             // Se hace la conversi�n usando un ByteArrayOutputStream y un
-             // ObjetOutputStream.
+    public byte[] toByteArray() {
+        try {
+            // Se hace la conversi�n usando un ByteArrayOutputStream y un
+            // ObjetOutputStream.
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            ObjectOutputStream os = new ObjectOutputStream (bytes);
+            ObjectOutputStream os = new ObjectOutputStream(bytes);
             os.writeObject(this);
             os.close();
             return bytes.toByteArray();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    /**
-     * Se convierte el array de bytes que recibe en un objeto DatoUdp.
-     * @param bytes El array de bytes
-     * @return Un DatoUdp.
-     */
-    public static TermAccount fromByteArray (byte [] bytes)
-    {
-        try
-        {
-            // Se realiza la conversi�n usando un ByteArrayInputStream y un
-            // ObjectInputStream
-            ByteArrayInputStream byteArray = new ByteArrayInputStream(bytes);
-            ObjectInputStream is = new ObjectInputStream(byteArray);
-            TermAccount aux = (TermAccount)is.readObject();
-            is.close();
-            return aux;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    
+    /**
+     * Se convierte el array de bytes que recibe en un objeto DatoUdp.
+     *
+     * @param bytes El array de bytes
+     * @return Un DatoUdp.
+     */
+    public static TermAccount fromByteArray(byte[] bytes) {
+        try {
+            // Se realiza la conversi�n usando un ByteArrayInputStream y un
+            // ObjectInputStream
+            ByteArrayInputStream byteArray = new ByteArrayInputStream(bytes);
+            ObjectInputStream is = new ObjectInputStream(byteArray);
+            TermAccount aux = (TermAccount) is.readObject();
+            is.close();
+            return aux;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
