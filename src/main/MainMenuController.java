@@ -12,6 +12,7 @@ import Domain.TermAccount;
 import Domain.accountMaintenance;
 import Domain.clientMaintenance;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -184,7 +185,7 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    private void btnSearch(ActionEvent event) {
+    private void btnSearch(ActionEvent event) throws ParseException {
         this.txtInfo.setText("");
 //        ClienteUDP.Cliente(txfClientId.getText());******************************
         
@@ -192,32 +193,32 @@ public class MainMenuController implements Initializable {
 
             txtClientData.setText(cm.getClient(txfClientId.getText()).toString());
 
-//            LinkedList<Account> list = am.getAccountsByClientId(txfClientId.getText());
+            //LinkedList<Account> list = am.getAccountsByClientId(txfClientId.getText());
             LinkedList<Account> list =(LinkedList) ClienteUDP.Cliente(txfClientId.getText());
 
-//            if (!list.isEmpty()) {
-//
-//                ObservableList<Account> oL = FXCollections.observableArrayList();
-//
-//                for (int i = 0; i < list.size(); i++) {
-//                    oL.add(list.get(i));
-//                }
-//
-//                listAccounts.setItems(oL);
-//                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
-//                    this.listAccounts.setVisible(true);
-//                    txtClientAccounts.setText("Cuentas del cliente");
-//                }
-//            } else {
-//                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
-//                    this.txtClientAccounts.setText("El cliente no tiene cuentas registradas.");
-//                }
-//            }
-//
-//        } else {
-//
-//            txtClientData.setText("El cliente buscado no existe.");
-//
+            if (!list.isEmpty()) {
+
+                ObservableList<Account> oL = FXCollections.observableArrayList();
+
+                for (int i = 0; i < list.size(); i++) {
+                    oL.add(list.get(i));
+                }
+
+                listAccounts.setItems(oL);
+                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
+                    this.listAccounts.setVisible(true);
+                    txtClientAccounts.setText("Cuentas del cliente");
+                }
+            } else {
+                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
+                    this.txtClientAccounts.setText("El cliente no tiene cuentas registradas.");
+                }
+            }
+
+        } else {
+
+            txtClientData.setText("El cliente buscado no existe.");
+
         }
 
     }
