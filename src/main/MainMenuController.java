@@ -186,36 +186,38 @@ public class MainMenuController implements Initializable {
     @FXML
     private void btnSearch(ActionEvent event) {
         this.txtInfo.setText("");
-        if (cm.existClient(txfClientId.getText())) {
-
-            txtClientData.setText(cm.getClient(txfClientId.getText()).toString());
-
-            LinkedList<Account> list = am.getAccountsByClientId(txfClientId.getText());
-
-            if (!list.isEmpty()) {
-
-                ObservableList<Account> oL = FXCollections.observableArrayList();
-
-                for (int i = 0; i < list.size(); i++) {
-                    oL.add(list.get(i));
-                }
-
-                listAccounts.setItems(oL);
-                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
-                    this.listAccounts.setVisible(true);
-                    txtClientAccounts.setText("Cuentas del cliente");
-                }
-            } else {
-                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
-                    this.txtClientAccounts.setText("El cliente no tiene cuentas registradas.");
-                }
-            }
-
-        } else {
-
-            txtClientData.setText("El cliente buscado no existe.");
-
-        }
+        ClienteUDP.Cliente(txfClientId.getText());
+        
+//        if (cm.existClient(txfClientId.getText())) {
+//
+//            txtClientData.setText(cm.getClient(txfClientId.getText()).toString());
+//
+//            LinkedList<Account> list = am.getAccountsByClientId(txfClientId.getText());
+//
+//            if (!list.isEmpty()) {
+//
+//                ObservableList<Account> oL = FXCollections.observableArrayList();
+//
+//                for (int i = 0; i < list.size(); i++) {
+//                    oL.add(list.get(i));
+//                }
+//
+//                listAccounts.setItems(oL);
+//                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
+//                    this.listAccounts.setVisible(true);
+//                    txtClientAccounts.setText("Cuentas del cliente");
+//                }
+//            } else {
+//                if (!this.txtTitle.getText().equals("Añadir cuenta")) {
+//                    this.txtClientAccounts.setText("El cliente no tiene cuentas registradas.");
+//                }
+//            }
+//
+//        } else {
+//
+//            txtClientData.setText("El cliente buscado no existe.");
+//
+//        }
 
     }
 
