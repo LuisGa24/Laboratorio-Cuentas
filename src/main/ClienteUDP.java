@@ -45,12 +45,6 @@ public class ClienteUDP {
 
             byte[] datos = mensaje.getBytes();
 
-//            SavingsAccount mensaje = new SavingsAccount('c', null, 0, "cfr", 0);
-//
-//            
-//            byte[] datos = mensaje.toByteArray();
-//            byte[] datos = mensaje.getBytes();
-            // crear y enviar paquete
             DatagramPacket enviarPaquete = new DatagramPacket(datos, datos.length,
                     InetAddress.getByName("127.0.0.1"), 6000);
 
@@ -64,7 +58,6 @@ public class ClienteUDP {
 
             socket.receive(recibirPaquete); //esperar el paquete
 
-//                SavingsAccount mensaje2 = SavingsAccount.fromByteArray(recibirPaquete.getData());
             String mensaje2 = new String(recibirPaquete.getData(), 0, recibirPaquete.getLength());
 
             String[] paqR = mensaje2.split("/");
@@ -77,7 +70,6 @@ public class ClienteUDP {
             LinkedList<Account> list = new LinkedList<>();
 
             for (int i = 1; i <= nC; i++) {
-                System.out.println(paqR[i]);
                 String cuenta[] = paqR[i].split("#");
                 if (cuenta[0].equals("AHORROS")) {
                     DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
